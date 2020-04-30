@@ -50,5 +50,7 @@ Version 1.0.14 : Adding 5.1 Compliance
 Version 1.0.15 : Remove warning from admin page
 Version 1.0.16 : Adding 5.2 Compliance
 Version 1.0.17 : Compliance with php 7.3
+Version 1.1.0  : Sync PHP support with WordPress, code styling
+
 == Upgrade notice ==
 

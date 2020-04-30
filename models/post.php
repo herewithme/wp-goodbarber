@@ -274,18 +274,24 @@ class GB_JSON_API_Post {
 
 	public function set_custom_fields_value() {
 		global $gb_json_api;
-		if ( $gb_json_api->query->ignore_custom_fields === "true" ) {
+
+		if ( $gb_json_api->query->ignore_custom_fields === 'true' ) {
 			return;
 		}
-		$keys                = $gb_json_api->introspector->get_custom_fields();
-		$wp_custom_fields    = get_post_custom( $this->id );
+
 		$this->custom_fields = new stdClass();
-		foreach ( $keys as $key ) {
-			foreach ( $key as $ke ) {
-				if ( isset( $wp_custom_fields[ $ke ] ) ) {
-					$this->custom_fields->$ke = $wp_custom_fields[ $ke ];
-				}
+		$wp_custom_fields    = get_post_custom( $this->id );
+		foreach ( $wp_custom_fields as $meta_key => $meta_values ) {
+			if ( 0 === strpos( $meta_key, '_wp_' ) || 0 === strpos( $meta_key, '_edit_' ) ) {
+				continue;
 			}
+
+			$first_value = reset( $meta_values );
+			if ( empty( $first_value ) ) {
+				continue;
+			}
+
+			$this->custom_fields->$meta_key = $first_value;
 		}
 	}
 

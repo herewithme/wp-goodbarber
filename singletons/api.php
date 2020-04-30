@@ -6,6 +6,7 @@ class GB_JSON_API {
 		$this->query        = new GB_JSON_API_Query();
 		$this->introspector = new GB_JSON_API_Introspector();
 		$this->response     = new GB_JSON_API_Response();
+
 		add_action( 'template_redirect', array( &$this, 'template_redirect' ) );
 		add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
 		add_action( 'update_option_gb_json_api_base', array( &$this, 'gb_flush_rewrite_rules' ) );

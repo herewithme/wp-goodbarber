@@ -215,14 +215,6 @@ class GB_JSON_API_Introspector {
 		return $this->get_author_by_id( $id );
 	}
 
-	public function get_custom_fields() {
-		global $wpdb;
-		$q   = "SELECT DISTINCT meta_key FROM $wpdb->postmeta WHERE meta_key NOT LIKE '_wp_%' AND meta_key NOT LIKE '_edit_%'";
-		$ret = $wpdb->get_results( $q, ARRAY_N );
-
-		return $ret;
-	}
-
 	public function get_comments( $post_id ) {
 		global $wpdb;
 		$wp_comments = $wpdb->get_results( $wpdb->prepare( "
@@ -323,6 +315,8 @@ class GB_JSON_API_Introspector {
 		if ( $gb_json_api->query->post_type ) {
 			$query['post_type'] = $gb_json_api->query->post_type;
 		}
+
+		$query = apply_filters( 'gb_set_posts_query', $query );
 
 		if ( ! empty( $query ) ) {
 			query_posts( $query );
