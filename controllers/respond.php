@@ -24,4 +24,3 @@ class GB_JSON_API_Respond_Controller {
   
 }
 
-?>

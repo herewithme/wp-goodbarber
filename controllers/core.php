@@ -416,4 +416,3 @@ class GB_JSON_API_Core_Controller {
   
 }
 
-?>

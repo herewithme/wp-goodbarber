@@ -29,19 +29,7 @@ class GB_JSON_API_Response {
     }
     
     $data = apply_filters('json_api_encode', $data);
-    
-    if (function_exists('json_encode')) {
-      // Use the built-in json_encode function if it's available
-      return json_encode($data);
-    } else {
-      // Use PEAR's Services_JSON encoder otherwise
-      if (!class_exists('Services_JSON')) {
-        $dir = gb_json_api_dir();
-        require_once "$dir/library/JSON.php";
-      }
-      $json = new Services_JSON();
-      return $json->encode($data);
-    }
+    return json_encode($data);
   }
   
   function is_value_included($key) {
@@ -180,5 +168,3 @@ class GB_JSON_API_Response {
   }
   
 }
-
-?>

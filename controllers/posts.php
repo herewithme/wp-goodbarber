@@ -31,4 +31,3 @@ class GB_JSON_API_Posts_Controller {
   
 }
 
-?>

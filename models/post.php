@@ -302,4 +302,3 @@ class GB_JSON_API_Post {
   
 }
 
-?>

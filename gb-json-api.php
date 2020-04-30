@@ -95,5 +95,3 @@ function gb_json_api_dir() {
 add_action('init', 'gb_json_api_init');
 register_activation_hook("$dir/gb-json-api.php", 'gb_json_api_activation');
 register_deactivation_hook("$dir/gb-json-api.php", 'gb_json_api_deactivation');
-
-?>

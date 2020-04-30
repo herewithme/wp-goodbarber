@@ -77,4 +77,3 @@ class GB_JSON_API_Comment {
   
 }
 
-?>
