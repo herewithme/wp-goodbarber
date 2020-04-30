@@ -88,11 +88,11 @@ class GB_JSON_API_Core_Controller {
 
 	public function get_post_by_url() {
 		global $gb_json_api;
-		global $wpdb;
+
 		$requested_post = $gb_json_api->query->get( 'url' );
 		$requested_post = str_replace( "\\", "", $requested_post );
 		$gbid           = url_to_postid( $requested_post );
-		if ( $gbid == 0 ) {
+		if ( $gbid === 0 ) {
 			$gb_json_api->error( "Not found." );
 		}
 		$posts    = $gb_json_api->introspector->get_posts( array( 'p' => $gbid ), true );

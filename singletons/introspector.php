@@ -205,27 +205,22 @@ class GB_JSON_API_Introspector {
 	}
 
 	public function get_author_by_login( $login ) {
-		global $wpdb;
-		$id = $wpdb->get_var( $wpdb->prepare( "
-      SELECT ID
-      FROM $wpdb->users
-      WHERE user_nicename = %s
-    ", $login ) );
+		$user = get_user_by( 'login', $login );
 
-		return $this->get_author_by_id( $id );
+		return $this->get_author_by_id( $user->ID );
 	}
 
 	public function get_comments( $post_id ) {
-		global $wpdb;
-		$wp_comments = $wpdb->get_results( $wpdb->prepare( "
-      SELECT *
-      FROM $wpdb->comments
-      WHERE comment_post_ID = %d
-        AND comment_approved = 1
-        AND comment_type = ''
-      ORDER BY comment_date
-    ", $post_id ) );
-		$comments    = array();
+		$wp_comments = get_comments(
+			array(
+				'post_id' => $post_id,
+				'status'  => 'approve',
+				'orderby' => 'comment_date',
+				'order'   => 'ASC',
+			)
+		);
+
+		$comments = array();
 		foreach ( $wp_comments as $wp_comment ) {
 			$comments[] = new GB_JSON_API_Comment( $wp_comment );
 		}
